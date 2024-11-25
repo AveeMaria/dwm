@@ -127,6 +127,10 @@ static const Key keys[] = {
 
 	/* NEOFETCH */
 	{ MODKEY|ShiftMask,	XK_n,	spawn,	SHCMD("st -e bash -c 'neofetch; sleep 5'") },
+
+
+	/* wifi connection */
+	{ MODKEY|ShiftMask,	XK_F8,	spawn,	SHCMD("bash -c 'nmcli dev wifi list; nmcli dev wifi connect \"neki\"; nmcli dev wifi connect \"mjav\";'") },
 };
 
 /* button definitions */
