@@ -1,13 +1,15 @@
 /* See LICENSE file for copyright and license details. */
 
+#include <X11/XF86keysym.h>
+
 /* appearance */
 static const unsigned int borderpx  = 2;        /* border pixel of windows */
 static const unsigned int gappx     = 8;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "monospace:size=12" };
-static const char dmenufont[]       = "monospace:size=12";
+static const char *fonts[]          = { "monospace:size=16" };
+static const char dmenufont[]       = "monospace:size=16";
 static const char col_gray1[]       = "#000000";
 static const char col_gray2[]       = "#333333";
 static const char col_gray3[]       = "#dbbada";
@@ -20,7 +22,7 @@ static const char *colors[][3]      = {
 };
 
 /* tagging */
-static const char *tags[] = { "a", "b", "c", "d", "e" };
+static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -45,8 +47,13 @@ static const Layout layouts[] = {
 	{ "[M]",      monocle },
 };
 
+
+/* MODKEY POSTANE SUPER */
+#define MODKEY Mod4Mask
+
 /* key definitions */
-#define MODKEY Mod1Mask
+/*#define MODKEY Mod1Mask*/
+
 #define TAGKEYS(KEY,TAG) \
 	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
@@ -76,7 +83,7 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
-	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
+	{ MODKEY|ShiftMask,		XK_f,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
@@ -96,6 +103,30 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
+	
+	/* BRIGHTNESS CONTOL */
+	{ 0, XF86XK_MonBrightnessUp, spawn, SHCMD("brightnessctl set 5%+")},
+	{ 0, XF86XK_MonBrightnessDown, spawn, SHCMD("brightnessctl set 5%-")},
+	
+	/* VOLUME CONTROL */
+	{ 0, XF86XK_AudioRaiseVolume, spawn, SHCMD("amixer set Master 5%+")},
+	{ 0, XF86XK_AudioLowerVolume, spawn, SHCMD("amixer set Master 5%-")},
+	{ 0, XF86XK_AudioMute, spawn, SHCMD("amixer set Master toggle")},
+
+	/* RANGER */
+	{ MODKEY,	 	XK_r, 	spawn,	SHCMD("st -e ranger") },
+
+	/* SURF */
+	{ MODKEY,	 	XK_s, 	spawn,	SHCMD("surf") },
+
+	/* FIREFOX */
+	{ MODKEY,		XK_f,	spawn,	SHCMD("firefox") },
+
+	/* CHROMIUM */	
+	{ MODKEY,		XK_f,	spawn,	SHCMD("chromium") },
+
+	/* NEOFETCH */
+	{ MODKEY|ShiftMask,	XK_n,	spawn,	SHCMD("st -e bash -c 'neofetch; sleep 5'") },
 };
 
 /* button definitions */
