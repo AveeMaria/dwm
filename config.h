@@ -123,14 +123,14 @@ static const Key keys[] = {
 	{ MODKEY,		XK_f,	spawn,	SHCMD("firefox") },
 
 	/* CHROMIUM */	
-	{ MODKEY,		XK_f,	spawn,	SHCMD("chromium") },
+	{ MODKEY,		XK_c,	spawn,	SHCMD("chromium") },
 
 	/* NEOFETCH */
 	{ MODKEY|ShiftMask,	XK_n,	spawn,	SHCMD("st -e bash -c 'neofetch; sleep 5'") },
 
 
 	/* wifi connection */
-	{ MODKEY|ShiftMask,	XK_F8,	spawn,	SHCMD("bash -c 'nmcli dev wifi list; nmcli dev wifi connect \"neki\"; nmcli dev wifi connect \"mjav\";'") },
+	{ MODKEY|ShiftMask,	XK_F8,	spawn,	SHCMD("bash -c '[\"$(nmcli radio wifi)\"] = \"enabled\" ] && nmcli radio wifi off || nmcli radio wifi on'") },
 };
 
 /* button definitions */
