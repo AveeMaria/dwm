@@ -68,6 +68,9 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "st", NULL };
 
+
+#include "shiftview.c";
+
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
@@ -93,6 +96,8 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
+	{ MODKEY,       	     	XK_a,	   shiftview,      {.i = -1 } },
+	{ MODKEY,	            	XK_d,	   shiftview,      {.i = +1 } },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
@@ -103,7 +108,10 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
-	
+
+
+
+
 	/* BRIGHTNESS CONTOL */
 	{ 0, XF86XK_MonBrightnessUp, spawn, SHCMD("brightnessctl set 5%+")},
 	{ 0, XF86XK_MonBrightnessDown, spawn, SHCMD("brightnessctl set 5%-")},
@@ -115,6 +123,9 @@ static const Key keys[] = {
 
 	/* RANGER */
 	{ MODKEY,	 	XK_r, 	spawn,	SHCMD("st -e ranger") },
+	
+	/* SLOCK */
+	{ MODKEY|ShiftMask, 	XK_l, 	spawn,	SHCMD("slock") },
 
 	/* SURF */
 	{ MODKEY,	 	XK_s, 	spawn,	SHCMD("surf") },
@@ -127,7 +138,6 @@ static const Key keys[] = {
 
 	/* NEOFETCH */
 	{ MODKEY|ShiftMask,	XK_n,	spawn,	SHCMD("st -e bash -c 'neofetch; sleep 5'") },
-
 
 	/* wifi connection */
 	{ MODKEY|ShiftMask,	XK_F8,	spawn,	SHCMD("bash -c '[\"$(nmcli radio wifi)\"] = \"enabled\" ] && nmcli radio wifi off || nmcli radio wifi on'") },
