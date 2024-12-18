@@ -8,8 +8,8 @@ static const unsigned int gappx     = 8;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "monospace:size=16" };
-static const char dmenufont[]       = "monospace:size=16";
+static const char *fonts[]          = { "monospace:size=16, Noto Color Emoji:size=10" };
+static const char dmenufont[]       = "monospace:size=16, Noto Color Emoji:size=10";
 static const char col_gray1[]       = "#000000";
 static const char col_gray2[]       = "#333333";
 static const char col_gray3[]       = "#dbbada";
@@ -79,7 +79,7 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
 	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
-	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
+	{ MODKEY,                       XK_o,      incnmaster,     {.i = -1 } },/*un retardiran stacking toggle*/
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
 	{ MODKEY,                       XK_Return, zoom,           {0} },
@@ -110,8 +110,6 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
 
 
-
-
 	/* BRIGHTNESS CONTOL */
 	{ 0, XF86XK_MonBrightnessUp, spawn, SHCMD("brightnessctl set 5%+")},
 	{ 0, XF86XK_MonBrightnessDown, spawn, SHCMD("brightnessctl set 5%-")},
@@ -119,7 +117,7 @@ static const Key keys[] = {
 	/* VOLUME CONTROL */
 	{ 0, XF86XK_AudioRaiseVolume, spawn, SHCMD("amixer set Master 5%+")},
 	{ 0, XF86XK_AudioLowerVolume, spawn, SHCMD("amixer set Master 5%-")},
-	{ 0, XF86XK_AudioMute, spawn, SHCMD("amixer set Master toggle")},
+	{ 0, XF86XK_AudioMute,	      spawn, SHCMD("amixer set Master toggle")},
 
 	/* RANGER */
 	{ MODKEY,	 	XK_r, 	spawn,	SHCMD("st -e ranger") },
@@ -127,8 +125,11 @@ static const Key keys[] = {
 	/* SLOCK */
 	{ MODKEY|ShiftMask, 	XK_l, 	spawn,	SHCMD("slock") },
 
+	/* SUBLIMETEXT */
+	{ MODKEY,		XK_s, 	spawn,	SHCMD("subl") },
+
 	/* SURF */
-	{ MODKEY,	 	XK_s, 	spawn,	SHCMD("surf") },
+	{ MODKEY|ShiftMask,	XK_s, 	spawn,	SHCMD("surf") },
 
 	/* FIREFOX */
 	{ MODKEY,		XK_f,	spawn,	SHCMD("firefox") },
